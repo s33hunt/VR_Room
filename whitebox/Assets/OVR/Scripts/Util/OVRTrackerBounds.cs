@@ -168,11 +168,13 @@ public class OVRTrackerBounds : MonoBehaviour
             // Display arrow icon if approaching edge of volume
             if (dist > -fadeDistance)
             {
-                iconImage.gameObject.SetActive(true);
-				iconImage.enabled = true;
-                iconImage.texture = iconTextures[closestPlane];
-                float alpha = SmoothStep(-fadeDistance, 0.0f, dist);
-                iconImage.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+				if(iconImage != null) { 
+					iconImage.gameObject.SetActive(true);
+					iconImage.enabled = true;
+					iconImage.texture = iconTextures[closestPlane];
+					float alpha = SmoothStep(-fadeDistance, 0.0f, dist);
+					iconImage.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+				}
             }
             else
             {
