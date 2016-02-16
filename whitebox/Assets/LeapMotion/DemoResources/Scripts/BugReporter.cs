@@ -46,13 +46,19 @@ public class BugReporter : MonoBehaviour {
       return m_interfaceEnabled;
     }
     set {
-      progressStatus.gameObject.SetActive(value);
-      progressBar.gameObject.SetActive(value);
-      progressText.gameObject.SetActive(value);
-      instructionText.gameObject.SetActive(value);
-      if (savedpathsText != null) {
-        savedpathsText.gameObject.SetActive(value);
-      }
+		if(progressStatus != null)
+		{
+			progressStatus.gameObject.SetActive(value);
+			progressBar.gameObject.SetActive(value);
+			progressText.gameObject.SetActive(value);
+		}
+		if (instructionText != null)
+		{
+			instructionText.gameObject.SetActive(value);
+		}
+		if (savedpathsText != null) {
+			savedpathsText.gameObject.SetActive(value);
+		}
     }
   }
 
