@@ -3,7 +3,7 @@ using System.Collections;
 
 public class test : MonoBehaviour
 {
-	/*public Transform hmd, cameraPin;
+	public Transform hmd, cameraPin;
 	OVRTracker ovrt = new OVRTracker();
 	Transform marker;
 
@@ -58,6 +58,6 @@ public class test : MonoBehaviour
 		marker.parent = null;
 		//set entire environment position to position of marker (aka, pin it to the tracking camera's position)
 		cameraPin.position = marker.position;
-	}*/
+	}
 }
 //print(ovrt.isPositionTracked+":"+p.position+":"+p.orientation);
