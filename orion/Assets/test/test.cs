@@ -15,31 +15,15 @@ public class test : MonoBehaviour
 		
 	}
 
-	void Update ()
+	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.O))
 		{
 			StartCoroutine("OrientToTheDungeon");
 		}
-
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			//get tracker pose
-			OVRPose p = ovrt.GetPose(Time.time);
-			print(ovrt.isPositionTracked);
-			print(p.position);
-			print(p.orientation);
-			marker.parent = hmd;
-			marker.localPosition = p.position;
-			marker.rotation = p.orientation;
-			marker.parent = null;
-			cameraPin.position = marker.position;
-		}
 
-		if (Input.GetKeyDown(KeyCode.R))
-		{
-			//recenter
-			UnityEngine.VR.InputTracking.Recenter();
 		}
 	}
 
@@ -61,3 +45,23 @@ public class test : MonoBehaviour
 	}
 }
 //print(ovrt.isPositionTracked+":"+p.position+":"+p.orientation);
+
+/*if (Input.GetKeyDown(KeyCode.Space))
+	{
+		//get tracker pose
+		OVRPose p = ovrt.GetPose(Time.time);
+		print(ovrt.isPositionTracked);
+		print(p.position);
+		print(p.orientation);
+		marker.parent = hmd;
+		marker.localPosition = p.position;
+		marker.rotation = p.orientation;
+		marker.parent = null;
+		cameraPin.position = marker.position;
+	}
+
+	if (Input.GetKeyDown(KeyCode.R))
+	{
+		//recenter
+		UnityEngine.VR.InputTracking.Recenter();
+	}*/
