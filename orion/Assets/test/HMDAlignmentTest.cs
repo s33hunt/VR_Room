@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class test : MonoBehaviour
+public class HMDAlignmentTest : MonoBehaviour
 {
 	public Transform hmd, cameraPin;
 	OVRTracker ovrt = new OVRTracker();
