@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HMDAlignmentTest : MonoBehaviour
 {
+	public static HMDAlignmentTest instance;
 	public Transform hmd, cameraPin;
 	OVRTracker ovrt = new OVRTracker();
 	Transform marker;
@@ -10,11 +11,12 @@ public class HMDAlignmentTest : MonoBehaviour
 
 	void Start()
 	{
+		instance = this;
 		marker = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
 		marker.localScale = Vector3.one * 0.1f;
 		
 	}
-
+	bool mbuttonpressed = false;
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.O))
@@ -24,6 +26,14 @@ public class HMDAlignmentTest : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.M))
 		{
 			ascii.enabled = !ascii.enabled;
+		}
+
+
+		if (CCInputManager.instance.k2Mbtns[7] && !mbuttonpressed) {
+			mbuttonpressed = true;
+			ascii.enabled = !ascii.enabled;
+		}else if (!CCInputManager.instance.k2Mbtns[7] && mbuttonpressed) {
+			mbuttonpressed = false;
 		}
 	}
 
