@@ -6,7 +6,7 @@ public class HMDAlignmentTest : MonoBehaviour
 	public Transform hmd, cameraPin;
 	OVRTracker ovrt = new OVRTracker();
 	Transform marker;
-
+	public AsciiImageEffect.Ascii ascii;
 
 	void Start()
 	{
@@ -21,9 +21,9 @@ public class HMDAlignmentTest : MonoBehaviour
 		{
 			StartCoroutine("OrientToTheDungeon");
 		}
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.M))
 		{
-
+			ascii.enabled = !ascii.enabled;
 		}
 	}
 
