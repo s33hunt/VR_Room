@@ -4,7 +4,7 @@ using System.Collections;
 public class HelmController : MonoBehaviour {
 	public enum HelmStage { initial, floating, resting }
 	public HelmStage helmstage = HelmStage.initial;
-
+	public static HelmController instance;
 	public float
 		rotationPerSecond = 1f,
 		speed = 0.01f,
@@ -15,9 +15,11 @@ public class HelmController : MonoBehaviour {
 	bool isGrabbed { get { return grabob.IsGrabbed(); } }
 	bool helmOnHead = false;
 	Transform startpos, endpos;
+	public AudioSource helmhum;
 
 	void Start() {
-		floatnHelm.SetActive(false);
+		instance = this;
+		//floatnHelm.SetActive(false);
 		headHelm.SetActive(false);
 		startpos = transform.parent.Find("helm start");
 		endpos = transform.parent.Find("helm end");
@@ -29,6 +31,7 @@ public class HelmController : MonoBehaviour {
 		
 		if(helmstage == HelmStage.floating)
 		{
+			if (!helmhum.isPlaying) { helmhum.Play(); }
 			floatnHelm.SetActive(true);
 			transform.position = Vector3.Lerp(transform.position, endpos.position, 0.5f * Time.deltaTime * speed);
 			transform.Rotate(0, rotationPerSecond * Time.deltaTime, 0);
@@ -37,6 +40,7 @@ public class HelmController : MonoBehaviour {
 			{
 				GetComponent<Rigidbody>().useGravity = true;
 				helmstage = HelmStage.resting;
+				helmhum.Stop();
 			}
 		}
 		else if (helmstage == HelmStage.resting)
@@ -53,6 +57,11 @@ public class HelmController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
-		print("sladfjk");
+		Vector3 v = GetComponent<Rigidbody>().velocity;
+		if (Mathf.Abs(v.x) > Mathf.Abs(0.1f) || Mathf.Abs(v.y) > Mathf.Abs(0.1f) || Mathf.Abs(v.z) > Mathf.Abs(0.1f))
+		{
+			AudioSource a = GetComponent<AudioSource>();
+			if (!a.isPlaying) { a.Play(); }
+		}
 	}
 }
