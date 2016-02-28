@@ -16,7 +16,7 @@ public class HMDAlignmentTest : MonoBehaviour
 		marker.localScale = Vector3.one * 0.1f;
 		
 	}
-	bool mbuttonpressed = false;
+	bool mbuttonpressed = false, r1buttonpressed = false, playbut = false;
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.O))
@@ -35,25 +35,69 @@ public class HMDAlignmentTest : MonoBehaviour
 		}else if (!CCInputManager.instance.k2Mbtns[7] && mbuttonpressed) {
 			mbuttonpressed = false;
 		}
+
+		if (CCInputManager.instance.k2Rbtns[0] && !r1buttonpressed) {
+			r1buttonpressed = true;
+			StartCoroutine("OrientToTheDungeon");
+		}
+		else if (!CCInputManager.instance.k2Mbtns[1] && r1buttonpressed) {
+			r1buttonpressed = false;
+		}
+
+		if (CCInputManager.instance.k2Play && !playbut)
+		{
+			playbut = true;
+			Application.LoadLevel(0);
+		}
+		else if (!CCInputManager.instance.k2Play && playbut)
+		{
+			playbut = false;
+		}
 	}
 
 	IEnumerator OrientToTheDungeon()
 	{
 		//recenter
-		UnityEngine.VR.InputTracking.Recenter();
+		//UnityEngine.VR.InputTracking.Recenter();
 		//wait a frame
 		yield return null;
 		//get tracker pose
-		OVRPose p = ovrt.GetPose(Time.time);
+		//OVRPose p = ovrt.GetPose(Time.time);
 		//set marker in hmd local space
-		marker.parent = hmd;
-		marker.localPosition = p.position;
-		marker.rotation = p.orientation;
-		marker.parent = null;
+		//marker.parent = hmd;
+		//marker.localPosition = p.position;
+		//marker.rotation = p.orientation;
+		//marker.parent = null;
 		//set entire environment position to position of marker (aka, pin it to the tracking camera's position)
-		cameraPin.position = marker.position;
+		cameraPin.position = hmd.position;
 	}
 }
+
+
+/*
+//recenter
+UnityEngine.VR.InputTracking.Recenter();
+//wait a frame
+yield return null;
+//get tracker pose
+OVRPose p = ovrt.GetPose(Time.time);
+//set marker in hmd local space
+marker.parent = hmd;
+marker.localPosition = p.position;
+marker.rotation = p.orientation;
+marker.parent = null;
+//set entire environment position to position of marker (aka, pin it to the tracking camera's position)
+cameraPin.position = marker.position;
+*/
+
+
+
+
+
+
+
+
+
 //print(ovrt.isPositionTracked+":"+p.position+":"+p.orientation);
 
 /*if (Input.GetKeyDown(KeyCode.Space))

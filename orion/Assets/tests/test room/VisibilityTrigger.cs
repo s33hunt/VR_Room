@@ -18,10 +18,9 @@ public class VisibilityTrigger : MonoBehaviour {
 		if (!happened && !s1.isPlaying) 
 		{
 			
-			s1.Play();
+			//
 			happened = true;
-			SWROD.SetActive(true);
-			sc.stage = SwordController.SwordStage.floating;
+			StartCoroutine("ee");
 		}
 
 		if(!creatureFreaked && sc.isGrabbed && !s2.isPlaying)
@@ -31,5 +30,13 @@ public class VisibilityTrigger : MonoBehaviour {
 			print("lakjsdlkajsd");
 			a.SetBool("isFreaked", true);
 		}
+	}
+
+	IEnumerator ee()
+	{
+		yield return new WaitForSeconds(10);
+		s1.Play();
+		SWROD.SetActive(true);
+		sc.stage = SwordController.SwordStage.floating;
 	}
 }
