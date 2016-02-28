@@ -6,7 +6,7 @@ public class SwordController : MonoBehaviour {
 	public SwordStage stage = SwordStage.initial;
 	public float speed = 90;
 	public GrabbableObject grabob;
-	bool isGrabbed { get { return grabob.IsGrabbed(); } }
+	public bool isGrabbed { get { return grabob.IsGrabbed(); } }
 	bool wasGrabbed = false;
 	Rigidbody rb;
 
@@ -14,6 +14,8 @@ public class SwordController : MonoBehaviour {
 	{
 		rb = GetComponent<Rigidbody>();
 	}
+
+
 
 	void Update ()
 	{
@@ -24,6 +26,7 @@ public class SwordController : MonoBehaviour {
 
 		if(isGrabbed && !wasGrabbed)
 		{
+			stage = SwordStage.inHand;
 			rb.useGravity = false;
 			rb.isKinematic = true;
 			wasGrabbed = true;
