@@ -27,15 +27,15 @@ public class SwordController : MonoBehaviour {
 		if(isGrabbed && !wasGrabbed)
 		{
 			stage = SwordStage.inHand;
-			rb.useGravity = false;
-			rb.isKinematic = true;
+			//rb.useGravity = false;
+			//rb.isKinematic = true;
 			wasGrabbed = true;
 		}
 		else if(!isGrabbed && wasGrabbed)
 		{
 			wasGrabbed = false;
-			rb.useGravity = true;
-			rb.isKinematic = false;
+			//rb.useGravity = true;
+			//rb.isKinematic = false;
 		}
 	}
 }
